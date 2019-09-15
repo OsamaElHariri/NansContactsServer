@@ -57,11 +57,11 @@ class ContactsController extends Controller
 
     public function destroy(string $id)
     {
-        $contact = Contact::find($id);
-        if (empty($contact)) {
+        $deleted = Contact::where('id', $id)->delete();
+        if ($deleted) {
+            return response()->json('Removed');
+        } else {
             return response("No contact with ID " . $id, 404);
         }
-        $contact->delete();
-        return response("Removed", 200);
     }
 }
