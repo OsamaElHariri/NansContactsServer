@@ -27,6 +27,8 @@ class ContactsController extends Controller
         $contact = new Contact;
         $contact->firstname = $request->input("firstname");
         $contact->lastname = $request->input("lastname");
+        $contact->phone = $request->input("phone");
+        $contact->email = $request->input("email");
         $contact->save();
         return response()->json($contact);
     }
@@ -46,6 +48,16 @@ class ContactsController extends Controller
         if (!empty($request->input("lastname"))) {
             $has_changed = true;
             $contact->lastname = $request->input("lastname");
+        }
+
+        if (!empty($request->input("phone"))) {
+            $has_changed = true;
+            $contact->phone = $request->input("phone");
+        }
+
+        if (!empty($request->input("email"))) {
+            $has_changed = true;
+            $contact->email = $request->input("email");
         }
 
         if ($has_changed) {
